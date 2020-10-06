@@ -1,8 +1,11 @@
 package com.example.quiz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -11,5 +14,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
+        btn_comecar.setOnClickListener{
+
+            if(et_name.text.toString().isEmpty()) {
+                Toast.makeText(this, "Por favor digite o seu nome", Toast.LENGTH_SHORT).show()
+            }else{
+                val intent = Intent(this, QuizQuestionActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }
