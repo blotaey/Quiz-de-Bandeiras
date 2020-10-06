@@ -8,19 +8,19 @@ object Constants{
         val que1 = Question(
             1,
             "Essa bandeira representa que pais?",
-            R.drawable.ba,
+            R.drawable.argen,
             "Argentina",
-            "Bahamas",
+            "El Salvador",
             "Barbados",
             "Maldivas",
-            2
+            1
         )
         questionList.add(que1)
 
         val que2 = Question(
             2,
             "Essa bandeira representa que pais?",
-            R.drawable.br,
+            R.drawable.bra,
             "Portugal",
             "República Dominicana",
             "Venezuela",
@@ -44,10 +44,10 @@ object Constants{
         val que4 = Question(
             4,
             "Essa bandeira representa que pais?",
-            R.drawable.leba,
+            R.drawable.egi,
             "Irã",
-            "Líbano",
             "Egito",
+            "Libano",
             "Jordânia",
             2
         )
@@ -56,31 +56,31 @@ object Constants{
         val que5 = Question(
             5,
             "Essa bandeira representa que pais?",
-            R.drawable.ne,
+            R.drawable.tai,
             "Nepal",
             "Tailândia",
             "Sri Lanka",
             "Butão",
-            1
+            2
         )
         questionList.add(que5)
 
         val que6 = Question(
             6,
             "Essa bandeira representa que pais?",
-            R.drawable.gui_bui,
+            R.drawable.guine,
             "Moçambique",
             "Gâmbia",
             "Guiné-Bissau",
             "Guiné",
-            3
+            4
         )
         questionList.add(que6)
 
         val que7 = Question(
             7,
             "Essa bandeira representa que pais?",
-            R.drawable.s_ko,
+            R.drawable.coreias,
             "Coreia do Sul",
             "China",
             "Austrália",
@@ -92,7 +92,7 @@ object Constants{
         val que8 = Question(
             8,
             "Essa bandeira representa que pais?",
-            R.drawable.phi,
+            R.drawable.fili,
             "Coreia do Norte",
             "Filipinas",
             "Singapura",
@@ -104,10 +104,10 @@ object Constants{
         val que9 = Question(
             9,
             "Essa bandeira representa que pais?",
-            R.drawable.n_ko,
+            R.drawable.que,
             "Malásia",
             "Brunei",
-            "Coreia do Norte",
+            "Quênia",
             "Timor-Leste",
             3
         )
