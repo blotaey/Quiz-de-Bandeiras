@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TintableCompoundDrawablesView
 import kotlinx.android.synthetic.main.activity_quiz_question.*
 import org.w3c.dom.Text
 
@@ -16,6 +18,7 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
+    private var mCorrectAnswers: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +32,19 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         tv_option_two.setOnClickListener(this)
         tv_option_three.setOnClickListener(this)
         tv_option_four.setOnClickListener(this)
-
+        btn_enviar.setOnClickListener(this)
     }
 
     private fun setQuestion(){
-        mCurrentPosition = 1
         val question = mQuestionsList!![mCurrentPosition-1]
 
         defaultOptionView()
+
+        if(mCurrentPosition == mQuestionsList!!.size){
+            btn_enviar.text = "TERMINE"
+        }else{
+            btn_enviar.text = "VÁ PARA A PROXIMA PERGUNTA"
+        }
 
         progressBar.progress = mCurrentPosition
         tv_progress.text = "$mCurrentPosition" + "/" + progressBar.max
@@ -72,13 +80,65 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
                 selectedOptionView(tv_option_one, 1)
             }
             R.id.tv_option_two ->{
-                selectedOptionView(tv_option_one, 2)
+                selectedOptionView(tv_option_two, 2)
             }
             R.id.tv_option_three ->{
-                selectedOptionView(tv_option_one, 3)
+                selectedOptionView(tv_option_three, 3)
             }
             R.id.tv_option_four ->{
-                selectedOptionView(tv_option_one, 4)
+                selectedOptionView(tv_option_four, 4)
+            }
+            R.id.btn_enviar ->{
+                if(mSelectedOptionPosition == 0){
+                    mCurrentPosition ++
+
+                    when{
+                        mCurrentPosition <= mQuestionsList!!.size ->{
+                            setQuestion()
+                        }else ->{
+                        Toast.makeText(this, "Parabéns!! Você acaba de terminar o quiz", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }else{
+                    val question = mQuestionsList?.get(mCurrentPosition -1)
+                    if(question!!.correctOption != mSelectedOptionPosition){
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }else{
+                        mCorrectAnswers++
+                    }
+                    answerView(question.correctOption, R.drawable.correct_option_border_bg)
+
+                    if(mCurrentPosition == mQuestionsList!!.size){
+                        btn_enviar.text = "TERMINE"
+                    }else {
+                        btn_enviar.text = "ENVIAR"
+                    }
+                    mSelectedOptionPosition = 0
+                }
+            }
+        }
+    }
+    private fun answerView(answer: Int, drawableView: Int){
+        when(answer){
+            1 ->{
+                tv_option_one.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+            2 ->{
+                tv_option_two.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+            3 ->{
+                tv_option_three.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
+            }
+            4 ->{
+                tv_option_four.background = ContextCompat.getDrawable(
+                    this, drawableView
+                )
             }
         }
     }
